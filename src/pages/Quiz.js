@@ -75,6 +75,7 @@ export default function Quiz() {
         setIsPrevDisabled(true)
         setIsNextDisabled(true)
         setQuestionsAnswered(0)
+        getQuestions()
     }
 
     // handle 'previous' and 'next'
@@ -149,7 +150,8 @@ export default function Quiz() {
                 <div className='score'>
                     <h3>Game Over</h3>
                     <div>Score : {score} / {questions.length}</div>
-                    <button onClick={handleRestart}>Restart Game</button>
+                    <br />
+                    <button className='restart' onClick={handleRestart}>Restart Game</button>
                 </div>
                 :
                 <>
