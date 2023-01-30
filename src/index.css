@@ -115,3 +115,8 @@ button {
 .score {
   text-align: center;
 }
+
+.wrap {
+  word-wrap: break-word;
+  padding: 0 5px;
+}

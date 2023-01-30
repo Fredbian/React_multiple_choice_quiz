@@ -1,3 +1,4 @@
+import { decode } from 'html-entities'
 import React from 'react'
 import { useState, useEffect } from 'react'
 // import Question from '../components/Question'
@@ -12,6 +13,10 @@ export default function Quiz() {
     const [currentQuestionText, setCurrentQuestionText] = useState('')
     const [currentCorrectAnswer, setCurrentCorrectAnswer] = useState('')
     const [options, setOptions] = useState([])
+    const [isPrevDisabled, setIsPrevDisabled] = useState(true)
+    const [isNextDisabled, setIsNextDisabled] = useState(true)
+    const [isAnswerDisabled, setIsAnswerDisabled] = useState(false)
+    const [questionsAnswered, setQuestionsAnswered] = useState(0)
 
 
     // get a random number
@@ -50,16 +55,46 @@ export default function Quiz() {
     function handleAnswer(e) {
         if (e.target.textContent === currentCorrectAnswer) {
             setScore(prevScore => prevScore += 1)
-            console.log(score);
         }
-
+        
         if (currentQuestionIndex + 1 < questions.length) {
             setCurrentQuestionIndex(currentQuestionIndex + 1)
         } else {
             setShowResult(true)
         }
+        setIsPrevDisabled(false)
+        setQuestionsAnswered(prevNumber => prevNumber += 1)
     }
 
+
+    // handle restart
+    function handleRestart() {
+        setScore(0)
+        setCurrentQuestionIndex(0)
+        setShowResult(false)
+        setIsPrevDisabled(true)
+        setIsNextDisabled(true)
+        setQuestionsAnswered(0)
+    }
+
+    // handle 'previous' and 'next'
+    function handlePrevious() {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex(prevIndex => prevIndex -= 1)
+            setIsNextDisabled(false)
+            setIsAnswerDisabled(true)
+        }
+    }
+
+    function handleNext() {
+        if (currentQuestionIndex < questions.length - 1) {
+            setCurrentQuestionIndex(prevIndex => prevIndex += 1)
+        }
+        if (currentQuestionIndex === questionsAnswered - 1) {
+            setIsAnswerDisabled(false)
+        }
+    }
+    
     // show score
     // useEffect(() => {
     //     if (currentQuestionIndex + 1 === questions.length) {
@@ -67,12 +102,6 @@ export default function Quiz() {
     //     }
     // }, [currentQuestionIndex, questions])
 
-    // handle restart
-    function handleRestart() {
-        setScore(0)
-        setCurrentQuestionIndex(0)
-        setShowResult(false)
-    }
 
     // console.log(questions)
 
@@ -125,21 +154,20 @@ export default function Quiz() {
                 :
                 <>
                     <div className='quiz-btn-container'>
-                        <button className='quiz-btn'>Previous</button>
-                        <button className='quiz-btn'>Next</button>
+                        <button onClick={handlePrevious} disabled={isPrevDisabled} className='quiz-btn'>Previous</button>
+                        <button onClick={handleNext} disabled={isNextDisabled} className='quiz-btn'>Next</button>
                     </div>
                     <div className='question-container'>
                         <div>
                             <p>Question {currentQuestionIndex + 1} out of 5</p>
-                            <h5>{currentQuestionText}</h5>
+                            <h5 className='wrap'>{decode(currentQuestionText)}</h5>
                             {options.map((option, index) => (
                                 <div key={index}>
-                                    <button onClick={handleAnswer} className='option-btn'>{option}</button>
+                                    <button onClick={handleAnswer} disabled={isAnswerDisabled} className={'option-btn' }>{decode(option)}</button>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div>Score : {score} / {questions.length}</div>
                 </>
             }
         </div>
