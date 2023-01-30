@@ -11,7 +11,6 @@ export default function Quiz() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentQuestionText, setCurrentQuestionText] = useState('')
     const [currentCorrectAnswer, setCurrentCorrectAnswer] = useState('')
-    const [currentIncorrectAnswers, setCurrentIncorrectAnswers] = useState([])
     const [options, setOptions] = useState([])
 
 
@@ -44,10 +43,36 @@ export default function Quiz() {
             setOptions(answers)
             setCurrentQuestionText(currentQuestion.question)
             setCurrentCorrectAnswer(currentQuestion.correct_answer)
-            setCurrentIncorrectAnswers(currentQuestion.incorrect_answers)
         }
     }, [questions, currentQuestionIndex])
 
+    // handle answer click
+    function handleAnswer(e) {
+        if (e.target.textContent === currentCorrectAnswer) {
+            setScore(prevScore => prevScore += 1)
+            console.log(score);
+        }
+
+        if (currentQuestionIndex + 1 < questions.length) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1)
+        } else {
+            setShowResult(true)
+        }
+    }
+
+    // show score
+    // useEffect(() => {
+    //     if (currentQuestionIndex + 1 === questions.length) {
+    //         setShowResult(true)
+    //     }
+    // }, [currentQuestionIndex, questions])
+
+    // handle restart
+    function handleRestart() {
+        setScore(0)
+        setCurrentQuestionIndex(0)
+        setShowResult(false)
+    }
 
     // console.log(questions)
 
@@ -91,23 +116,32 @@ export default function Quiz() {
 
     return (
         <div className='main-container'>
-            <div className='quiz-btn-container'>
-                <button className='quiz-btn'>Previous</button>
-                <button className='quiz-btn'>Next</button>
-            </div>
-            <div className='question-container'>
-                <div>
-                    <p>Question {currentQuestionIndex + 1} out of 5</p>
-                    <h3>{currentQuestionText}</h3>
-                    {/* <h3>{questions[currentQuestionIndex].question}</h3> */}
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
+            {showResult ?
+                <div className='score'>
+                    <h3>Game Over</h3>
+                    <div>Score : {score} / {questions.length}</div>
+                    <button onClick={handleRestart}>Restart Game</button>
                 </div>
-            </div>
+                :
+                <>
+                    <div className='quiz-btn-container'>
+                        <button className='quiz-btn'>Previous</button>
+                        <button className='quiz-btn'>Next</button>
+                    </div>
+                    <div className='question-container'>
+                        <div>
+                            <p>Question {currentQuestionIndex + 1} out of 5</p>
+                            <h5>{currentQuestionText}</h5>
+                            {options.map((option, index) => (
+                                <div key={index}>
+                                    <button onClick={handleAnswer} className='option-btn'>{option}</button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div>Score : {score} / {questions.length}</div>
+                </>
+            }
         </div>
     )
 }
