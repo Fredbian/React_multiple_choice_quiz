@@ -93,6 +93,7 @@ export default function Quiz() {
         }
         if (currentQuestionIndex === questionsAnswered - 1) {
             setIsAnswerDisabled(false)
+            setIsNextDisabled(true)
         }
     }
     
@@ -136,6 +137,7 @@ export default function Quiz() {
     //     log()
     // }, [questions])
 
+    console.log(questionsAnswered)
 
 
     if (loading) {
