@@ -26,7 +26,7 @@ code {
   height: 520px;
   animation: animated-border 1.5s infinite;
   margin: 50px auto;
-  width: 60%;
+  width: 50%;
   background-color: rgba(245, 247, 251, 1);
   background-image: url(../public/images/blob-right.png), url(../public/images/blob-left.png);
   background-repeat: no-repeat, no-repeat;
