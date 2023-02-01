@@ -22,5 +22,7 @@ npm run develop
 * GraphQL
 
 ### Sceenshots
-![Screenshot]()
+![Screenshot](https://github.com/Fredbian/React_multiple_choice_quiz/blob/main/client/public/images/1.png)
+![Screenshot](https://github.com/Fredbian/React_multiple_choice_quiz/blob/main/client/public/images/2.png)
+![Screenshot](https://github.com/Fredbian/React_multiple_choice_quiz/blob/main/client/public/images/3.png)
 
