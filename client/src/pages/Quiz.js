@@ -97,49 +97,6 @@ export default function Quiz() {
         }
     }
     
-    // show score
-    // useEffect(() => {
-    //     if (currentQuestionIndex + 1 === questions.length) {
-    //         setShowResult(true)
-    //     }
-    // }, [currentQuestionIndex, questions])
-
-
-    // console.log(questions)
-
-    // get current question
-    // const currentQuestion = questions[currentQuestionIndex]
-
-    // if (currentQuestion) {   
-    //     const questionText = currentQuestion.question
-    //     const correct = currentQuestion.correct_answer
-    //     const incorrect = currentQuestion.incorrect_answers
-    //     const options = [...incorrect]
-    //     const getRandomNum = (max) => {
-    //         return Math.floor(Math.random() * Math.floor(max))
-    //     }
-    //     options.splice(getRandomNum(incorrect.length), 0, correct)
-
-    //     setQuestion({
-    //         questionText: questionText,
-    //         correct: correct,
-    //         incorrect: incorrect,
-    //         options: options
-    //     })
-    // }
-
-    // function log() {
-    //     const currentQuestion = questions[currentQuestionIndex]
-    //     console.log(currentQuestion)
-    // }
-
-    // useEffect(() => {
-    //     log()
-    // }, [questions])
-
-    console.log(questionsAnswered)
-
-
     if (loading) {
         return (
             <h1 className='loading'>loading...</h1>
