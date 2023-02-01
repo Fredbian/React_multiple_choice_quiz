@@ -25,8 +25,8 @@ code {
   min-width: 320px;
   height: 520px;
   animation: animated-border 1.5s infinite;
-  margin: 10px auto;
-  width: 80%;
+  margin: 50px auto;
+  width: 60%;
   background-color: rgba(245, 247, 251, 1);
   background-image: url(../public/images/blob-right.png), url(../public/images/blob-left.png);
   background-repeat: no-repeat, no-repeat;

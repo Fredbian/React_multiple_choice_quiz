@@ -26,3 +26,7 @@ npm run develop
 ![Screenshot](https://github.com/Fredbian/React_multiple_choice_quiz/blob/main/client/public/images/2.png)
 ![Screenshot](https://github.com/Fredbian/React_multiple_choice_quiz/blob/main/client/public/images/3.png)
 
+### URLs
+* Github: https://github.com/Fredbian/React_multiple_choice_quiz
+* Deployed Link: https://multiple-choice-app.herokuapp.com/ 
+
